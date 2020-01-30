@@ -8,8 +8,8 @@ In this project, We’ll be building Facebook. We're not focusing in styling, bu
 [Odin Project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project)
 
 ##### Authors
-[Hugo Passos](https://github.com/hugopassos)
 [Julian Belmonte](https://github.com/jucora)
+[Hugo Passos](https://github.com/hugopassos)
 
 ###### Language Used
 Ruby on Rails
