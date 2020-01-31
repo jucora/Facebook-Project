@@ -4,6 +4,7 @@ RSpec.feature 'Session', type: :feature do
 	before :each do
 		User.create(name:'user', email: 'user@mail.com', password: 'password')
 	end
+	
 	context 'Login successfull' do
 		scenario 'should get to home' do
 			visit new_user_session_path

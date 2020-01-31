@@ -65,4 +65,9 @@ RSpec.describe User, type: :model do
   		expect(user.errors[:password_confirmation]).to include("doesn't match Password")
   	end
   end
+
+  it 'should have many posts' do
+    user = User.reflect_on_association(:posts)
+    expect(user.macro).to eq(:has_many)
+  end
 end
