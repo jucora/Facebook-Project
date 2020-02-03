@@ -36,6 +36,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do

@@ -1,3 +1,18 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+
+  get 'users/index'
+  get 'posts/new'
+  get 'posts/create'
+  get 'posts/show'
+  get 'posts/index'
+  get 'posts/edit'
+  get 'posts/destroy'
+  devise_for :users
+
+
+  resources :users, only: :index
+  resources :posts
 end
