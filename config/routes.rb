@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/index'
   get 'posts/new'
   get 'posts/create'
   get 'posts/show'
@@ -9,5 +10,6 @@ Rails.application.routes.draw do
   devise_for :users
 	root to: "home#index"
 
+  resources :users, only: :index
   resources :posts
 end
