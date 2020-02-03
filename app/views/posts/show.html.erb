@@ -1,2 +1,8 @@
 <h1>Post</h1>
+<p>Author: <%= User.find(@post.user_id).name %></p>
+<p>Post: </p>
 <%= @post.body %>
+<br>
+<br>
+<%= link_to "update", edit_post_path(@post) %>
+<%= link_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" } %>
