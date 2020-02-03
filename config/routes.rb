@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+
   get 'users/index'
   get 'posts/new'
   get 'posts/create'
@@ -6,9 +10,8 @@ Rails.application.routes.draw do
   get 'posts/index'
   get 'posts/edit'
   get 'posts/destroy'
-  get 'home/index'
   devise_for :users
-	root to: "home#index"
+
 
   resources :users, only: :index
   resources :posts
