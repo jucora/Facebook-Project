@@ -1,11 +1,17 @@
 <h1>Posts</h1>
 <% @posts.each do |p| %>
-  <p>Author: <%= User.find(p.user_id).name %></p>
+  <% author = User.find(p.user_id) %>
+  <span><%= user_gravatar author %></span>
+  <p>Author: <%= author.name %></p>
   <p>Post: </p>
   <%= p.body %>
+
   <br>
   <br>
-  <%= link_to "update", edit_post_path(p) %>
-  <%= link_to "delete", p, method: :delete, data: { confirm: "Are you sure?" } %>
+  <%= link_to pluralize(p.comments.count, 'comment').to_s, post_path(p.id) %>
+  <% if p.user_id == current_user.id %>
+  	<%= link_to 'update', edit_post_path(p) %>
+  	<%= link_to 'delete', p, method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
   <hr>
 <% end %>

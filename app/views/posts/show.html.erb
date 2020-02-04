@@ -1,8 +1,25 @@
 <h1>Post</h1>
-<p>Author: <%= User.find(@post.user_id).name %></p>
+<% author = User.find(@post.user_id) %>
+<span><%= user_gravatar author %></span>
+<p>Author: <%= author.name %></p>
 <p>Post: </p>
-<%= @post.body %>
+<%= @post.body %><br><br>
+<% if @post.user_id == current_user.id %>
+	<%= link_to "update", edit_post_path(@post) %>
+	<%= link_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+<br>
+<hr>
+<ul style="list-style: none;">
+	<% @post.comments.each do |c| %>
+		<% user = User.find(c.user_id) %>
+		<li><span><%= user_gravatar user %></span>
+	  <%= c.body %>
+	  <br></li>
+	<% end %>
+</ul>
+<hr>
+<%= render 'comments/new_comment' %>
 <br>
 <br>
-<%= link_to "update", edit_post_path(@post) %>
-<%= link_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" } %>
+
