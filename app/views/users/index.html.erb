@@ -2,5 +2,12 @@
 <% @users.each do |u| %>
 	<%= user_gravatar u %>
 	<%= u.name %>
+	<% if u.inverse_friendships.find_by(user_id: current_user.id, confirmed: true) %>
+		<%= button_to 'Delete friend' %>
+	<% elsif u.inverse_friendships.find_by(user_id: current_user.id, confirmed: false) %>
+		<%= button_to 'Pending' %>
+	<% else %>
+		<%= button_to 'Add friend' %>
+	<% end %>
 	<br><br>
 <% end %>
