@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+	require 'users_helper'
+
 	before_action :authenticate_user!
 	before_action :configure_devise_params, if: :devise_controller?
 
