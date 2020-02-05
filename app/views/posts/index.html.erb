@@ -5,7 +5,6 @@
   <p>Author: <%= author.name %></p>
   <p>Post: </p>
   <%= p.body %>
-
   <br>
   <br>
   <%= link_to pluralize(p.comments.count, 'comment').to_s, post_path(p.id) %>

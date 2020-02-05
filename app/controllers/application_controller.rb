@@ -12,5 +12,8 @@ class ApplicationController < ActionController::Base
 		posts_path
 	end
 
+	def like_exists?(user_id, post_id)
+		Like.where(user_id: user_id, post_id: post_id).exists?
+	end
 
 end
