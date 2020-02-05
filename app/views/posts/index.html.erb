@@ -7,6 +7,14 @@
   <%= p.body %>
   <br>
   <br>
+  <% already_liked = p.likes.find_by(user_id: current_user.id) %>
+  <% if already_liked %>
+  	<%= link_to "#{p.likes.count} Unlike", post_like_path(p, already_liked), method: :delete %>
+  <% else %>
+  	<%= link_to "#{p.likes.count} Like", post_likes_path(p), method: :post %>
+  <% end %>
+  <br>
+  <br>
   <%= link_to pluralize(p.comments.count, 'comment').to_s, post_path(p.id) %>
   <% if p.user_id == current_user.id %>
   	<%= link_to 'update', edit_post_path(p) %>
