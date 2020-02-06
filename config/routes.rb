@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   end
 
   get 'users/index'
+  get 'users/friends', to: 'users#friends'
+  get 'users/friends_pending', to: 'users#friends_pending'
   get 'posts/new'
   get 'posts/create'
   get 'posts/show'

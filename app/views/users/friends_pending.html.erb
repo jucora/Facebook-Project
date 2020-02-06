@@ -1,0 +1,8 @@
+<h1>Your friend requests</h1>
+<% @friends_pending.each do |f| %>
+	<%= user_gravatar f %><br>
+	<%= f.name %><br>
+	<%= button_to 'Accept' %>
+	<%= button_to 'Reject' %>
+	<hr>
+<% end %>

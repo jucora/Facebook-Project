@@ -12,4 +12,24 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+
+  def friends
+  	friends = []
+  	friendships = self.friendships.where(confirmed: true)
+  	friendships.each do |fs|
+  		friends << User.find(fs.friend_id)
+  	end
+  	friends
+  end
+
+  def friends_pending
+  	friends_pending = []
+  	friendships = self.friendships.where(confirmed: false)
+  	friendships.each do |fs|
+  		friends_pending << User.find(fs.friend_id)
+  	end
+  	friends_pending
+  end
+
+
 end
