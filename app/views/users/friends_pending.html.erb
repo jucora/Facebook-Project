@@ -3,6 +3,6 @@
 	<%= user_gravatar f %><br>
 	<%= f.name %><br>
 	<%= button_to 'Accept', friendship_path(id: f.id), method: :put %>
-	<%= button_to 'Reject' %>
+	<%= button_to 'Reject', friendship_path(id: f.id), method: :delete %>
 	<hr>
 <% end %>

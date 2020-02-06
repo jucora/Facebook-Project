@@ -2,6 +2,6 @@
 <% @friends.each do |f| %>
 	<%= user_gravatar f %><br>
 	<%= f.name %><br>
-	<%= button_to 'Delete friend' %>
+	<%= button_to 'Delete', friendship_path(id: f.id), method: :delete %>
 	<hr>
 <% end %>

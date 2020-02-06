@@ -24,7 +24,12 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-
+  	if @friendship = (Friendship.where(user_id: params[:id], friend_id: current_user.id).first)
+  		@friendship.destroy
+  	elsif @friendship = (Friendship.where(user_id: current_user.id, friend_id: params[:id]).first)
+  		@friendship.destroy
+  	end
+  	redirect_back(fallback_location: root_path)
   end
 
   private
