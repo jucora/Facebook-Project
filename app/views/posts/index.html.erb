@@ -1,11 +1,24 @@
 <h1>Posts</h1>
 <% @posts.each do |p| %>
-  <p>Author: <%= User.find(p.user_id).name %></p>
+  <% author = User.find(p.user_id) %>
+  <span><%= user_gravatar author %></span>
+  <p>Author: <%= author.name %></p>
   <p>Post: </p>
   <%= p.body %>
   <br>
   <br>
-  <%= link_to "update", edit_post_path(p) %>
-  <%= link_to "delete", p, method: :delete, data: { confirm: "Are you sure?" } %>
+  <% already_liked = p.likes.find_by(user_id: current_user.id) %>
+  <% if already_liked %>
+  	<%= link_to "#{p.likes.count} Unlike", post_like_path(p, already_liked), method: :delete %>
+  <% else %>
+  	<%= link_to "#{p.likes.count} Like", post_likes_path(p), method: :post %>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to pluralize(p.comments.count, 'comment').to_s, post_path(p.id) %>
+  <% if p.user_id == current_user.id %>
+  	<%= link_to 'update', edit_post_path(p) %>
+  	<%= link_to 'delete', p, method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
   <hr>
 <% end %>

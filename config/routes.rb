@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   get 'posts/destroy'
   devise_for :users
 
-
   resources :users, only: :index
-  resources :posts
+  resources :comments, only: %i[edit update destroy]
+  resources :posts do
+    resources :comments
+    resources :likes
+  end
+
 end
