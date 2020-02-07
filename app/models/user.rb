@@ -15,19 +15,15 @@ class User < ApplicationRecord
 
   def friends
   	friends = []
-    if user_sent_request?
-      friendships = self.friendships.where(confirmed: true)
-      friendships.each do |fs|
-    		friends << User.find(fs.friend_id)
-    	end
-    	return friends
-    else
-      friendships = self.inverse_friendships.where(confirmed: true)
-      friendships.each do |fs|
-    		friends << User.find(fs.user_id)
-    	end
-      return friends
-    end
+    friends_sent = self.friendships.where(confirmed: true)
+    friends_sent.each { |fs| friends << User.find(fs.friend_id) }
+
+    friends_received = self.inverse_friendships.where(confirmed: true)
+    friends_received.each { |fs| friends << User.find(fs.user_id) }
+
+    friends
+
+    # User.joins(:inverse_friendships).where("friendships.confirmed = true AND friendships.user_id = ?", self.id
   end
 
   def friends_pending
@@ -37,13 +33,5 @@ class User < ApplicationRecord
   		friends_pending << User.find(fs.user_id)
   	end
   	friends_pending
-  end
-
-  def user_sent_request?
-    if !self.friendships.first.nil? && self.id == self.friendships.first.user_id
-      true
-    else
-      false
-    end
   end
 end
