@@ -16,10 +16,10 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.where(user_id: params[:id], friend_id: current_user.id)
     if @friendship.first.update_attributes(confirmed: true)
       flash[:notice] = 'Friend accepted!'
-      redirect_to users_friends_pending_path
+      redirect_to users_path
     else
       flash[:alert] = 'Something went wrong'
-      redirect_to users_friends_pending_path
+      redirect_to users_friends_path
     end
   end
 

@@ -3,7 +3,7 @@
 	<%= link_to 'All posts', posts_path %>
 	<%= link_to 'Create post', new_post_path %>
 	<%= link_to "My friends (#{current_user.friends.count})", users_friends_path %>
-	<%= link_to "My requests (#{current_user.friends_pending.count})", users_friends_pending_path %>
+	<%= link_to "My requests (#{current_user.inverse_friendships_pending.count})", users_friends_pending_path %>
 	<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
 <% else %>
 	<%= link_to 'Sign In', new_user_session_path %>
