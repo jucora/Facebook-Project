@@ -27,7 +27,7 @@ RSpec.feature 'Post', type: :feature do
 			visit posts_new_path
       fill_in 'post[body]', with: ''
 			click_button 'Create post'
-			expect(page).to have_content('Can\'t be blank')
+			expect(page).to have_content('Something went wrong')
 		end
 	end
 
