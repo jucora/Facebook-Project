@@ -2,18 +2,18 @@
 <% @users.each do |u| %>
 	<%= user_gravatar u %>
 	<%= u.name %>
-	<% if !current_user.inverse_friendships_pending.include?(u) && !current_user.friendships_pending.include?(u) && !current_user.friends.include?(u) %>
+	<% if !friendships_pending(u) && !inverse_friendships_pending(u) && !friends(u) %>
 		<%= button_to 'Add friend', friendships_path(id: u.id) if u.id != current_user.id %>
-	<% elsif current_user.friends.include?(u) %>
+	<% elsif friends(u) %>
 		<%= button_to 'Delete friend', friendship_path(id: u.id), method: :delete %>
 	<% end %>
 
-	<% if current_user.inverse_friendships_pending.include?(u) %>
+	<% if inverse_friendships_pending(u) %>
 		<%= button_to 'Accept', friendship_path(id: u.id), method: :put %>
 		<%= button_to 'Reject', friendship_path(id: u.id), method: :delete %>
 	<% end %>
 
-	<% if current_user.friendships_pending.include?(u) %>
+	<% if friendships_pending(u) %>
 		<%= button_to 'Cancel request', friendship_path(id: u.id), method: :delete %>
 	<% end %>
 

@@ -1,7 +1,22 @@
 module UsersHelper
-  # def has_friend(friend, current_user_id, confirmed = true)
-  #   friend.inverse_friendships.find_by(user_id: current_user_id, confirmed: confirmed)
-  # end
 
-  
+	def friends(u)
+		current_user.friends.include?(u)
+	end
+
+	def friendships_confirmed(u)
+		current_user.friendships_pending.include?(u)
+	end
+
+	def inverse_friendships_confirmed(u)
+		current_user.inverse_friendships_pending.include?(u)
+	end
+
+	def friendships_pending(u)
+		current_user.friendships_pending.include?(u)
+	end
+
+	def inverse_friendships_pending(u)
+		current_user.inverse_friendships_pending.include?(u)
+	end
 end
