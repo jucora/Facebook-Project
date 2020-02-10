@@ -13,9 +13,13 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
+  # This method returns all the friendships, no matter if the user sent or received the friendship request
+
   def friends
     return friendships_confirmed + inverse_friendships_confirmed
   end
+
+  # Friendship methods will return an array containing pending or confirmed friends, based on the where clause condition
 
   def friendships_pending
     friendships_pending = []
