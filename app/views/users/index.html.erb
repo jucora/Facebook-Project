@@ -1,6 +1,26 @@
 <h1>Users</h1>
 <% @users.each do |u| %>
-	<%= user_gravatar u %>
-	<%= u.name %>
-	<br><br>
+	<div class="card text-center" style="width: 30rem;">
+	  <div class="card-body row">
+			<div class="col-md-6">
+				<span class="card-img-top"><%= link_to image_tag("http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(u.email)}", :alt => 'Avatar', :class => 'avatar'), user_path(id: u.id) %></span>
+				<h5 class="card-title"><%= link_to "#{u.name}", user_path(id: u.id) %></h5>
+			</div>
+			<div class="col-md-6 row">
+				<% if !friendships_pending(u) && !inverse_friendships_pending(u) && !friends(u) %>
+		    	<%= button_to 'Add friend', friendships_path(id: u.id), class: "btn btn-primary" if u.id != current_user.id %>
+				<% elsif friends(u) %>
+					<%= button_to 'Delete friend', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
+				<% end %>
+				<% if inverse_friendships_pending(u) %>
+					<%= button_to 'Accept', friendship_path(id: u.id), class: "btn btn-primary", method: :put %>
+					<%= button_to 'Reject', friendship_path(id: u.id), class: "btn btn-primary", method: :delete %>
+				<% end %>
+				<% if friendships_pending(u) %>
+					<%= button_to 'Cancel request', friendship_path(id: u.id), class: "btn btn-secondary", method: :delete %>
+				<% end %>
+			</div>
+	  </div>
+	</div>
+	<br>
 <% end %>

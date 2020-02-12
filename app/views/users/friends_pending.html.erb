@@ -1,0 +1,8 @@
+<h1>Your friend requests</h1>
+<% current_user.inverse_friendships_pending.each do |f| %>
+	<%= user_gravatar f %><br>
+	<%= f.name %><br>
+	<%= button_to 'Accept', friendship_path(id: f.id), method: :put %>
+	<%= button_to 'Reject', friendship_path(id: f.id), method: :delete %>
+	<hr>
+<% end %>

@@ -13,7 +13,7 @@ RSpec.feature 'User', type: :feature do
 		end
 	end
 
-	context 'Incorrect login' do
+	context 'Invalid signup' do
 		scenario 'should display error messages for empty fields' do
 			visit new_user_registration_path
 			fill_in 'Name', with: 'hugo'
