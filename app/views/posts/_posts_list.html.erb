@@ -1,0 +1,23 @@
+<% @posts.each do |p| %>
+  <% author = User.find(p.user_id) %>
+  <span><%= link_to image_tag("http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(author.email)}", :alt => 'Avatar', :class => 'avatar'), user_path(id: author.id) %></span>
+  <p>Author: <%= link_to "#{author.name}", user_path(id: author.id) %></p>
+  <p>Post: </p>
+  <%= p.body %>
+  <br>
+  <br>
+  <% already_liked = p.likes.find_by(user_id: current_user.id) %>
+  <% if already_liked %>
+  	<%= link_to "#{p.likes.count} Unlike", post_like_path(p, already_liked), method: :delete %>
+  <% else %>
+  	<%= link_to "#{p.likes.count} Like", post_likes_path(p), method: :post %>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to pluralize(p.comments.count, 'comment').to_s, post_path(p.id) %>
+  <% if p.user_id == current_user.id %>
+  	<%= link_to 'update', edit_post_path(p) %>
+  	<%= link_to 'delete', p, method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
+  <hr>
+<% end %>

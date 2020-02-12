@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/index'
+  get 'users/show'
   get 'users/friends', to: 'users#friends'
   get 'users/friends_pending', to: 'users#friends_pending'
   get 'posts/new'
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   put 'friendships/:id', to: 'friendships#update'
   devise_for :users
 
-  resources :users, only: :index
+  resources :users, only: %i[index show]
   resources :comments, only: %i[edit update destroy]
   resources :friendships, only: %i[create update destroy]
   resources :posts do

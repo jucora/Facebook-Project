@@ -3,8 +3,8 @@
 	<div class="card text-center" style="width: 30rem;">
 	  <div class="card-body row">
 			<div class="col-md-6">
-				<span class="card-img-top"><%= user_gravatar u %></span>
-		    <h5 class="card-title"><%= u.name %></h5>
+				<span class="card-img-top"><%= link_to image_tag("http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(u.email)}", :alt => 'Avatar', :class => 'avatar'), user_path(id: u.id) %></span>
+				<h5 class="card-title"><%= link_to "#{u.name}", user_path(id: u.id) %></h5>
 			</div>
 			<div class="col-md-6 row">
 				<% if !friendships_pending(u) && !inverse_friendships_pending(u) && !friends(u) %>

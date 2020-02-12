@@ -5,10 +5,10 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.create(friend_id: @friend.id)
     if @friendship.save
       flash[:notice] = 'Request sent!'
-      redirect_to users_path
+      redirect_back(fallback_location: root_path)
     else
       flash[:alert] = 'Something went wrong'
-      redirect_to users_path
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -16,10 +16,10 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.where(user_id: params[:id], friend_id: current_user.id)
     if @friendship.first.update_attributes(confirmed: true)
       flash[:notice] = 'Friend accepted!'
-      redirect_to users_path
+      redirect_back(fallback_location: root_path)
     else
       flash[:alert] = 'Something went wrong'
-      redirect_to users_friends_path
+      redirect_back(fallback_location: root_path)
     end
   end
 

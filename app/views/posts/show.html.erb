@@ -26,6 +26,8 @@
 	  <%= c.body %>
 		<% if c.user_id == current_user.id %>
 			<%= link_to "update", edit_post_comment_path(@post.id, c.id) %>
+		<% end %>
+		<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
 			<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" } %>
 		<% end %>
 	  <br></li>
