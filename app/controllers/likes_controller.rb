@@ -19,7 +19,8 @@ class LikesController < ApplicationController
 	def find_post
 		@post = Post.find(params[:post_id])
 	end
-
+	
+	# This method will find if the current user liked the post 
 	def like_exists?
 		Like.where(user_id: current_user.id, post_id: params[:post_id]).any?
 	end
