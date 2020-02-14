@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
-  before_action :find_friend, only: %i[create destroy]
+  before_action :find_friend, only: %i[create destroy find_friendship]
+  before_action :find_friendship, only: :create
 
   def create
     @friendship = current_user.friendships.create(friend_id: @friend.id)
@@ -36,5 +37,12 @@ class FriendshipsController < ApplicationController
 
   def find_friend
     @friend = User.find(params[:id])
+  end
+
+  def find_friendship
+    if Friendship.where(user_id: current_user.id, friend_id: @friend.id).exists? || Friendship.where(user_id: @friend.id, friend_id: current_user.id).exists?
+      flash[:alert] = "Can't add the same friend twice"
+      redirect_to users_path
+    end
   end
 end

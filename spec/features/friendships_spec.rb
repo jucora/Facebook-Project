@@ -11,6 +11,18 @@ RSpec.feature 'Friendship', type: :feature do
     user.friendships.create(friend_id: user3.id)
   end
 
+  context 'Adding a friend' do
+  	scenario 'should prevent users from adding the same friend twice by using the method find_friendship in FriendshipsController' do
+  		visit new_user_session_path
+			fill_in 'Email', with: user.email
+			fill_in 'Password', with: user.password
+			click_button 'Log in'
+			rack_test_session_wrapper = Capybara.current_session.driver
+			rack_test_session_wrapper.submit :post, friendships_path(id: user2.id), nil
+			expect(page).to have_content("Can't add the same friend twice")
+  	end
+  end
+
 	context 'Display user friends' do
 		scenario 'should display the button to delete a friend and cancel a sent request' do
       visit new_user_session_path

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.most_recent
   end
 
   def new
@@ -11,10 +11,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:notice] = 'Post created!'
-      redirect_to @post
+      redirect_back(fallback_location: root_path)
     else
       flash[:alert] = 'Something went wrong'
-      render 'new'
+      redirect_back(fallback_location: root_path)
     end
   end
 
