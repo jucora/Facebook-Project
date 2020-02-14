@@ -4,7 +4,7 @@ RSpec.feature 'Session', type: :feature do
 	before :each do
 		@user = User.create(name:'user', email: 'user@mail.com', password: 'password', password_confirmation: 'password')
 	end
-	
+
 	context 'Login successfull' do
 		scenario 'should get to home' do
 			visit new_user_session_path
@@ -18,6 +18,13 @@ RSpec.feature 'Session', type: :feature do
 			visit users_path
 			click_link @user.name
 			expect(page.current_path).to eq(user_path(id:@user.id))
+		end
+	end
+
+	context 'Login with Facebook' do
+		scenario 'should allow login with Facebook' do
+			visit root_path
+			expect(page).to have_link(nil, href: '/users/auth/facebook')
 		end
 	end
 
