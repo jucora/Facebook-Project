@@ -1,10 +1,9 @@
-<div class="jumbotron">	
+<div class="jumbotron">
 	<h1>Users</h1>
 	<% @users.each do |u| %>
 		<div class="row">
 			<div class="col-md-4" style="text-align: center;">
-				<span><%= link_to image_tag("http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(u.email)}", :alt => 'Avatar', :class => 'avatar'), user_path(id: u.id) %></span>
-				<h5><%= link_to "#{u.name}", user_path(id: u.id) %></h5>
+				<%= render 'links_to_profiles', u: u %>
 			</div>
 			<div class="col-md-8">
 				<% if !friendships_pending(u) && !inverse_friendships_pending(u) && !friends(u) %>
@@ -18,7 +17,7 @@
 							<%= button_to 'Accept', friendship_path(id: u.id), class: "btn btn-primary", method: :put %>
 						</div>
 						<div class="col-md-6">
-							<%= button_to 'Reject', friendship_path(id: u.id), class: "btn btn-primary", method: :delete %>
+							<%= button_to 'Reject', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
 						</div>
 					</div>
 				<% end %>

@@ -22,10 +22,11 @@ module UsersHelper
 		current_user.inverse_friendships_pending.include?(u)
 	end
 
+	# This method will return at most the 9 last friends added by the user
+
 	def show_nine_friends(user)
-		
-		#The variable limit will bring the nth last friend added by the user
-		limit = user.friends.length * -1 
-		user.friends[limit..-1]
+		# The variable limit will bring the nth last friend added by the user
+		limit = user.friends.length * -1
+		limit >= -9 ? user.friends[limit..-1] : user.friends[-9..-1]
 	end
 end
