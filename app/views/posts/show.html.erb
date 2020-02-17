@@ -7,17 +7,25 @@
 <br>
 <br>
 <% already_liked = @post.likes.find_by(user_id: current_user.id) %>
+<%= @post.likes.count %>
 <% if already_liked %>
-	<%= link_to "#{@post.likes.count} Unlike", post_like_path(@post, already_liked), method: :delete %>
+	<%= link_to post_like_path(@post, already_liked), method: :delete do %>
+  	<i class="fas fa-thumbs-up"></i>
+  <% end %>
 <% else %>
-	<%= link_to "#{@post.likes.count} Like", post_likes_path(@post), method: :post %>
-<% end %>
+	<%= link_to post_likes_path(@post), method: :post do %>
+  	<i class="far fa-thumbs-up"></i>
+  <% end %>
+<% end %><br><br>
+<%= @post.comments.count %>
+	<%= link_to post_path(@post.id) do %>
+    <i class="far fa-comments"></i>
+  <% end %>
 <br><br>
 <% if @post.user_id == current_user.id %>
 	<%= link_to "update", edit_post_path(@post) %>
 	<%= link_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
-<br>
 <hr>
 <ul style="list-style: none;">
 	<% @post.comments.each do |c| %>
@@ -30,7 +38,7 @@
 		<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
 			<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" } %>
 		<% end %>
-	  <br></li>
+	  <br><br></li>
 	<% end %>
 </ul>
 <hr>

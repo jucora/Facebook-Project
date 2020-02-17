@@ -21,13 +21,15 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3 row friends">
-    <h2 class="col-md-12">Friends</h2>
-    <% show_nine_friends(@user).each do |u| %>
-      <div class="col-md-4">
-        <%= render 'links_to_profiles', u: u %>
-      </div>
-    <% end %>
+  <div class="col-md-3">
+    <div class="row friends">
+      <h2 class="col-md-12">Friends</h2>  
+      <% show_nine_friends(@user).each do |u| %>
+        <div class="col-md-4">
+          <%= render 'links_to_profiles', u: u %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-8 posts">
