@@ -20,10 +20,10 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-3">
+<div class="row justify-content-between">
+  <div class="col-md-4">
     <div class="row white-background">
-      <h2 class="col-md-12">Friends</h2>  
+      <h2 class="col-md-12">Friends</h2>
       <% show_nine_friends(@user).each do |u| %>
         <div class="col-md-4">
           <%= render 'links_to_profiles', u: u %>
@@ -31,9 +31,9 @@
       <% end %>
     </div>
   </div>
-  <div class="col-md-1"></div>
-  <div class="col-md-8 white-background">
+  <div class="col-md-7 white-background">
     <% if @user.id == current_user.id %>
+      <h2>Create a post</h2>
       <% @post = Post.new %>
       <%= render 'posts/post_form' %>
     <% end %>

@@ -1,37 +1,27 @@
 <div class="white-background row" style="text-align: center;">
 	<h1 class="col-md-12">Users</h1>
-	<% @users.each do |u| %>
-		<div class="col-md-3">
-			<div>
+	<div class="row">
+		<% @users.each do |u| %>
+			<div class="col-md-3">
 				<%= render 'links_to_profiles', u: u %>
-			</div>
-			<div class="row">
 				<% if !friendships_pending(u) && !inverse_friendships_pending(u) && !friends(u) %>
-				  <div class="col-md-12">
-				  	<%= button_to 'Add friend', friendships_path(id: u.id), class: "btn btn-primary" if u.id != current_user.id %>
-				  </div>
+		  		<%= button_to 'Add friend', friendships_path(id: u.id), class: "btn btn-primary" if u.id != current_user.id %>
 				<% elsif friends(u) %>
-					<div class="col-md-12">
-						<%= button_to 'Delete friend', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
-					</div>
+					<%= button_to 'Delete friend', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
 				<% end %>
 				<% if inverse_friendships_pending(u) %>
-					<div class="col-md-12">
-						<span style="display: inline-block;">
+					<span style="display: inline-block;">
 						<%= button_to 'Accept', friendship_path(id: u.id), class: "btn btn-primary", method: :put %>
 					</span>
 					<span style="display: inline-block;">
 						<%= button_to 'Reject', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
 					</span>
-					</div>
-					
 				<% end %>
 				<% if friendships_pending(u) %>
-					<div class="col-md-12">
-						<%= button_to 'Cancel request', friendship_path(id: u.id), class: "btn btn-secondary", method: :delete %>
-					</div>
+					<%= button_to 'Cancel request', friendship_path(id: u.id), class: "btn btn-secondary", method: :delete %>
 				<% end %>
-			</div><br><br>
-		</div>
-	<% end %>
+				<br><br><br>
+			</div>
+		<% end %>
+	</div>
 </div>
