@@ -21,4 +21,11 @@ module UsersHelper
 	def inverse_friendships_pending(u)
 		current_user.inverse_friendships_pending.include?(u)
 	end
+
+	def show_nine_friends(user)
+		
+		#The variable limit will bring the nth last friend added by the user
+		limit = user.friends.length * -1 
+		user.friends[limit..-1]
+	end
 end

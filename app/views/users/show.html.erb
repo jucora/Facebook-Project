@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-md-4">
+<div class="row cover">
+  <div class="col-md-12">
     <%= user_gravatar @user %>
     <h3><%= @user.name %></h3>
     <% if !friendships_pending(@user) && !inverse_friendships_pending(@user) && !friends(@user) %>
@@ -18,8 +18,19 @@
     <% end %>
     <br>
   </div>
+</div>
 
-  <div class="col-md-8">
+<div class="row">
+  <div class="col-md-3 friends">
+    <h2>Friends</h2>
+    <div>
+      <% show_nine_friends(@user).each do |f| %>
+        <%= user_gravatar f %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-8 posts">
     <% if @user.id == current_user.id %>
       <% @post = Post.new %>
       <%= render 'posts/post_form' %>

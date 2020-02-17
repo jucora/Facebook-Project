@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'posts/edit'
   get 'posts/destroy'
   put 'friendships/:id', to: 'friendships#update'
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :users, only: %i[index show]
   resources :comments, only: %i[edit update destroy]

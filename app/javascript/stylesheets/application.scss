@@ -1,1 +1,28 @@
-@import "~bootstrap/scss/bootstrap"; 
+@import "~bootstrap/scss/bootstrap";
+
+body{
+	background-color: #f3f3f3;
+}
+
+.navbar{
+	padding: 10px 10%;
+}
+
+.cover{
+	background-image: url(/assets/code.jpg);
+	background-position: center;
+	background-size: 100%;
+	color: white;
+	padding: 10% 2% 0 2%;
+}
+
+.friends{
+	background-color: white;
+	height: 200px;
+	margin-top: 10px;
+	padding: 2px; 
+}
+
+.posts{
+	background-color: white;
+} 
