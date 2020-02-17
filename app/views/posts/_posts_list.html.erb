@@ -8,7 +8,7 @@
     <br>
     <br>
     <% already_liked = p.likes.find_by(user_id: current_user.id) %>
-    <%= p.likes.count %>
+    <%= p.likes.count %><br>
     <% if already_liked %>
     	<%= link_to post_like_path(p, already_liked), method: :delete do %>
             <i class="fas fa-thumbs-up"></i>
@@ -20,7 +20,7 @@
     <% end %>
     <br>
     <br>
-    <%= p.comments.count %>
+    <%= %>
     <%= link_to post_path(p.id) do %>
         <i class="far fa-comments"></i>
     <% end %>

@@ -5,6 +5,12 @@ body{
 	background-color: #f3f3f3;
 }
 
+h1{
+	margin-bottom: 50px;
+	margin-top: 20px;
+	text-align: center;	
+}
+
 .navbar{
 	padding: 10px 10%;
 }
@@ -14,15 +20,12 @@ body{
 	background-position: center;
 	background-size: 100%;
 	color: white;
-	padding: 10% 2% 0 2%;
+	
 }
 
-.friends{
+.white-background{
 	background-color: white;
 	margin-top: 10px;
-	padding: 2px;
+	padding: 2%;
 }
 
-.posts{
-	background-color: white;
-}
