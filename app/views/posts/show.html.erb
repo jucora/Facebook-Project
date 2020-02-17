@@ -2,9 +2,17 @@
 	<h1>Post</h1>
 	<% author = User.find(@post.user_id) %>
 	<span><%= user_gravatar author %></span>
-	<p>Author: <%= author.name %></p>
-	<p>Post: </p>
-	<%= @post.body %>
+	<p><b>Author:</b> <%= author.name %></p>
+	<p><b>Post: </b></p>
+	<%= @post.body %><br><br>
+	<% if @post.user_id == current_user.id %>
+		<span style="display: inline-block;">
+			<%= button_to "update", edit_post_path(@post), class: 'btn btn-primary', method: :get %>	
+		</span>
+		<span style="display: inline-block;">
+			<%= button_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+		</span>
+	<% end %>
 	<br>
 	<br>
 	<% already_liked = @post.likes.find_by(user_id: current_user.id) %>
@@ -23,10 +31,6 @@
 	    <i class="far fa-comments"></i>
 	  <% end %>
 	<br><br>
-	<% if @post.user_id == current_user.id %>
-		<%= link_to "update", edit_post_path(@post) %>
-		<%= link_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" } %>
-	<% end %>
 	<ul style="list-style: none;">
 		<hr>
 		<% @post.comments.each do |c| %>
