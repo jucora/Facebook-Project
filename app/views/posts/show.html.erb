@@ -34,16 +34,26 @@
 	<ul style="list-style: none;">
 		<hr>
 		<% @post.comments.each do |c| %>
-			<% user = User.find(c.user_id) %>
-			<li><span><%= user_gravatar user %></span>
-		  <%= c.body %>
-			<% if c.user_id == current_user.id %>
-				<%= link_to "update", edit_post_comment_path(@post.id, c.id) %>
-			<% end %>
-			<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
-				<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" } %>
-			<% end %>
-		  <br><br></li>
+			<li>
+			<div class="row">
+				<div class="col-md-1">
+					<% user = User.find(c.user_id) %>
+					<span><%= user_gravatar(user, { size: 60 } )  %></span>
+				</div>
+				<div class="col-md-8">
+					<%= c.body %>
+				</div>
+				<div class="col-md-3">
+					<% if c.user_id == current_user.id %>
+						<%= link_to "update", edit_post_comment_path(@post.id, c.id), class: 'btn btn-primary' %>
+					<% end %>
+					<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
+						<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+					<% end %>
+				</div>
+			</div></li>
+			<hr>
+			<br><br>
 		<% end %>
 	</ul>
 	<%= render 'comments/new_comment' %>
