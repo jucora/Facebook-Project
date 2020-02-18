@@ -1,39 +1,59 @@
-<h1>Post</h1>
-<% author = User.find(@post.user_id) %>
-<span><%= user_gravatar author %></span>
-<p>Author: <%= author.name %></p>
-<p>Post: </p>
-<%= @post.body %>
-<br>
-<br>
-<% already_liked = @post.likes.find_by(user_id: current_user.id) %>
-<% if already_liked %>
-	<%= link_to "#{@post.likes.count} Unlike", post_like_path(@post, already_liked), method: :delete %>
-<% else %>
-	<%= link_to "#{@post.likes.count} Like", post_likes_path(@post), method: :post %>
-<% end %>
-<br><br>
-<% if @post.user_id == current_user.id %>
-	<%= link_to "update", edit_post_path(@post) %>
-	<%= link_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" } %>
-<% end %>
-<br>
-<hr>
-<ul style="list-style: none;">
-	<% @post.comments.each do |c| %>
-		<% user = User.find(c.user_id) %>
-		<li><span><%= user_gravatar user %></span>
-	  <%= c.body %>
-		<% if c.user_id == current_user.id %>
-			<%= link_to "update", edit_post_comment_path(@post.id, c.id) %>
-		<% end %>
-		<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
-			<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" } %>
-		<% end %>
-	  <br></li>
+<div class="white-background">
+	<h1>Post</h1>
+	<% author = User.find(@post.user_id) %>
+	<%= render 'users/links_to_profiles', u: author %>
+	<p><b>Post: </b></p>
+	<%= @post.body %><br><br>
+	<% if @post.user_id == current_user.id %>
+		<span style="display: inline-block;">
+			<%= button_to "update", edit_post_path(@post), class: 'btn btn-primary', method: :get %>
+		</span>
+		<span style="display: inline-block;">
+			<%= button_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+		</span>
 	<% end %>
-</ul>
-<hr>
-<%= render 'comments/new_comment' %>
-<br>
-<br>
+	<br>
+	<br>
+	<% already_liked = @post.likes.find_by(user_id: current_user.id) %>
+	<%= @post.likes.count %>
+	<% if already_liked %>
+		<%= link_to post_like_path(@post, already_liked), method: :delete do %>
+	  	<i class="fas fa-thumbs-up"></i>
+	  <% end %>
+	<% else %>
+		<%= link_to post_likes_path(@post), method: :post do %>
+	  	<i class="far fa-thumbs-up"></i>
+	  <% end %>
+	<% end %><br><br>
+	<%= @post.comments.count %>
+		<%= link_to post_path(@post.id) do %>
+	    <i class="far fa-comments"></i>
+	  <% end %>
+	<br><br>
+	<ul style="list-style: none;">
+		<hr>
+		<% @post.comments.each do |c| %>
+			<li>
+				<div class="row">
+					<div class="col-md-2">
+						<% user = User.find(c.user_id) %>
+						<%= render 'users/links_to_profiles', u: user %>
+					</div>
+					<div class="col-md-7 ">
+						<%= c.body %>
+					</div>
+					<div class="col-md-3">
+						<% if c.user_id == current_user.id %>
+							<%= link_to "update", edit_post_comment_path(@post.id, c.id), class: 'btn btn-primary' %>
+						<% end %>
+						<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
+							<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+						<% end %>
+					</div>
+				</div>
+			</li>
+			<hr>
+		<% end %>
+	</ul>
+	<%= render 'comments/new_comment' %>
+</div>

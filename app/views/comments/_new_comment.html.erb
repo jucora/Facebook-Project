@@ -1,5 +1,5 @@
 <h3>Add comment</h3>
 <%= form_for([@post, @post.comments.build]) do |f| %>
-	<%= f.text_area :body %><br>
-	<%= f.submit "Post my comment" %>
+	<%= f.text_area :body, class: 'form-control-lg' %><br><br>
+	<%= f.submit "Post my comment", class: 'btn btn-primary' %>
 <% end %>

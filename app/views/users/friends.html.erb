@@ -1,7 +1,12 @@
-<h1>Your friends</h1>
-<% current_user.friends.each do |f| %>
-	<%= user_gravatar f %><br>
-	<%= f.name %><br>
-	<%= button_to 'Delete', friendship_path(id: f.id), method: :delete %>
-	<hr>
-<% end %>
+<div class="white-background" style="text-align: center;">
+	<h1 class="col-md-12">Your Friends</h1>
+	<div class="row">
+		<% current_user.friends.each do |u| %>
+			<div class="col-md-3">
+				<%= render 'links_to_profiles', u: u %>
+				<%= button_to 'Delete', friendship_path(id: u.id), method: :delete, class: 'btn btn-danger' %>
+				<br><br><br>
+			</div>
+		<% end %>
+	</div>
+</div>
