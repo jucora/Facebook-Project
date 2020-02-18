@@ -1,0 +1,10 @@
+<div class="white-background">
+	<h1>Update comment</h1>
+	<%= form_for @comment do |f| %>
+  	<%= f.text_area :body, class: 'form-control' %>
+  	<%= f.hidden_field :post_id %>
+  	<br>
+  	<%= f.submit "Update comment", class: 'btn btn-primary' %>
+	<% end %>
+</div>
+

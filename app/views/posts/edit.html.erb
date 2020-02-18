@@ -1,0 +1,15 @@
+<div class="white-background">
+	<h1>Update post</h1>
+	<div class="row">
+		<div class="col-md-2">
+			<%= render 'users/links_to_profiles', u: current_user %>
+		</div>
+		<div class="col-md-10">
+			<%= form_for @post do |f| %>
+  			<%= f.text_area :body, class: 'form-control' %>
+  			<br>
+  			<%= f.submit "Update post", class: 'btn btn-primary' %>
+			<% end %>
+		</div>
+	</div>
+</div>

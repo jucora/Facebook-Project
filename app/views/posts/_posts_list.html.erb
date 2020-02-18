@@ -1,0 +1,38 @@
+<% @posts.each do |p| %>
+  <% author = User.find(p.user_id) %>
+  <% if p.user_id == current_user.id || friends(author) %>
+    <%= render 'users/links_to_profiles', u: author %>
+    <p><b>Post: </b></p>
+    <%= p.body %>
+    <% if p.user_id == current_user.id %>
+        <br><br>
+        <span style="display: inline-block;">
+            <%= button_to 'update', edit_post_path(id: p.id), class: 'btn btn-primary', method: :get %>
+        </span>
+        <span style="display: inline-block;">
+            <%= button_to 'delete', p, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+        </span>
+    <% end %>
+    <br>
+    <br>
+    <% already_liked = p.likes.find_by(user_id: current_user.id) %>
+    <%= p.likes.count %>
+    <% if already_liked %>
+    	<%= link_to post_like_path(p, already_liked), method: :delete do %>
+            <i class="fas fa-thumbs-up"></i>
+        <% end %>
+    <% else %>
+    	<%= link_to post_likes_path(p), method: :post do %>
+            <i class="far fa-thumbs-up"></i>
+        <% end %>
+    <% end %>
+    <br>
+    <br>
+    <%= p.comments.count %>
+    <%= link_to post_path(p.id) do %>
+        <i class="far fa-comments"></i>
+    <% end %>
+
+    <hr>
+  <% end %>
+<% end %>

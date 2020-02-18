@@ -1,0 +1,27 @@
+<div class="white-background row" style="text-align: center;">
+	<h1 class="col-md-12">Users</h1>
+	<div class="row">
+		<% @users.each do |u| %>
+			<div class="col-md-3">
+				<%= render 'links_to_profiles', u: u %>
+				<% if !friendships_pending(u) && !inverse_friendships_pending(u) && !friends(u) %>
+		  		<%= button_to 'Add friend', friendships_path(id: u.id), class: "btn btn-primary" if u.id != current_user.id %>
+				<% elsif friends(u) %>
+					<%= button_to 'Delete friend', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
+				<% end %>
+				<% if inverse_friendships_pending(u) %>
+					<span style="display: inline-block;">
+						<%= button_to 'Accept', friendship_path(id: u.id), class: "btn btn-primary", method: :put %>
+					</span>
+					<span style="display: inline-block;">
+						<%= button_to 'Reject', friendship_path(id: u.id), class: "btn btn-danger", method: :delete %>
+					</span>
+				<% end %>
+				<% if friendships_pending(u) %>
+					<%= button_to 'Cancel request', friendship_path(id: u.id), class: "btn btn-secondary", method: :delete %>
+				<% end %>
+				<br><br><br>
+			</div>
+		<% end %>
+	</div>
+</div>

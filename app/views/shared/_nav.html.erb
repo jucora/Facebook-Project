@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="<%= posts_path %>" style="font-size: 200%;">FAKEBOOK</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+    	<% if user_signed_in? %>
+	      <li class="nav-item active">
+	        <%= link_to 'All users', users_path, class: 'nav-link' %>
+	      </li>
+	      <li class="nav-item">
+	        <%= link_to 'All posts', posts_path, class: 'nav-link' %>
+	      </li>
+	      <li class="nav-item">
+	        <%= link_to 'Create post', new_post_path, class: 'nav-link' %>
+	      </li>
+	      <li class="nav-item">
+	        <%= link_to "My friends (#{current_user.friends.count})", users_friends_path, class: 'nav-link' %>
+	      </li>
+	      <li class="nav-item">
+	        <%= link_to "My requests (#{current_user.inverse_friendships_pending.count})", users_friends_pending_path, class: 'nav-link' %>
+	      </li>
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Profile
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <%= link_to 'My Profile', user_path(id: current_user.id), class: 'dropdown-item' %>
+	          <div class="dropdown-divider"></div>
+	          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+	        </div>
+	      </li>
+	      <% else %>
+	      	<li><%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %></li>
+	      	<li><%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %></li>
+	      <% end %>
+	    </ul>
+   </div>
+</nav>

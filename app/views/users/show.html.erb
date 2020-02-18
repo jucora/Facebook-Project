@@ -1,0 +1,44 @@
+<div class="row cover">
+  <div class="col-md-12">
+    <%= user_gravatar @user %>
+    <h3><%= @user.name %></h3>
+    <% if !friendships_pending(@user) && !inverse_friendships_pending(@user) && !friends(@user) %>
+      <%= button_to 'Add friend', friendships_path(id: @user.id), class: "btn btn-primary" if @user.id != current_user.id %>
+    <% elsif friends(@user) %>
+      <%= button_to 'Delete friend', friendship_path(id: @user.id), class: "btn btn-danger", method: :delete %>
+    <% end %>
+
+    <% if inverse_friendships_pending(@user) %>
+      <%= button_to 'Accept', friendship_path(id: @user.id), class: "btn btn-primary", method: :put %>
+      <%= button_to 'Reject', friendship_path(id: @user.id), class: "btn btn-primary", method: :delete %>
+    <% end %>
+
+    <% if friendships_pending(@user) %>
+      <%= button_to 'Cancel request', friendship_path(id: @user.id), class: "btn btn-secondary", method: :delete %>
+    <% end %>
+    <br>
+  </div>
+</div>
+
+<div class="row justify-content-between">
+  <div class="col-md-4">
+    <div class="row white-background">
+      <h2 class="col-md-12">Friends</h2>
+      <% show_nine_friends(@user).each do |u| %>
+        <div class="col-md-4">
+          <%= render 'links_to_profiles', u: u %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-7 white-background">
+    <% if @user.id == current_user.id %>
+      <h2>Create a post</h2>
+      <% @post = Post.new %>
+      <%= render 'posts/post_form' %>
+    <% end %>
+    <% if friends(@user) || current_user == @user %>
+      <%= render 'posts/posts_list' %>
+    <% end %>
+  </div>
+</div>
