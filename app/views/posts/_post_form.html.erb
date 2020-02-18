@@ -1,7 +1,7 @@
 <div class="form-group">
 	<div class="row">
 		<div class="col-md-2">
-			<%= user_gravatar current_user %>
+			<%= render 'users/links_to_profiles', u: current_user %>
 		</div>
 		<div class="col-md-10">
 			<%= form_for @post do |f| %>

@@ -1,8 +1,7 @@
 <% @posts.each do |p| %>
   <% author = User.find(p.user_id) %>
   <% if p.user_id == current_user.id || friends(author) %>
-    <span><%= link_to image_tag("http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(author.email)}", :alt => 'Avatar', :class => 'avatar'), user_path(id: author.id) %></span>
-    <p><b>Author:</b> <%= link_to "#{author.name}", user_path(id: author.id) %></p>
+    <%= render 'users/links_to_profiles', u: author %>
     <p><b>Post: </b></p>
     <%= p.body %>
     <% if p.user_id == current_user.id %>
@@ -12,7 +11,7 @@
         </span>
         <span style="display: inline-block;">
             <%= button_to 'delete', p, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-        </span>    
+        </span>
     <% end %>
     <br>
     <br>
@@ -33,7 +32,7 @@
     <%= link_to post_path(p.id) do %>
         <i class="far fa-comments"></i>
     <% end %>
-    
+
     <hr>
   <% end %>
 <% end %>

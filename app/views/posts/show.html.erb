@@ -1,13 +1,12 @@
 <div class="white-background">
 	<h1>Post</h1>
 	<% author = User.find(@post.user_id) %>
-	<span><%= user_gravatar author %></span>
-	<p><b>Author:</b> <%= author.name %></p>
+	<%= render 'users/links_to_profiles', u: author %>
 	<p><b>Post: </b></p>
 	<%= @post.body %><br><br>
 	<% if @post.user_id == current_user.id %>
 		<span style="display: inline-block;">
-			<%= button_to "update", edit_post_path(@post), class: 'btn btn-primary', method: :get %>	
+			<%= button_to "update", edit_post_path(@post), class: 'btn btn-primary', method: :get %>
 		</span>
 		<span style="display: inline-block;">
 			<%= button_to "delete", @post, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
@@ -35,25 +34,25 @@
 		<hr>
 		<% @post.comments.each do |c| %>
 			<li>
-			<div class="row">
-				<div class="col-md-1">
-					<% user = User.find(c.user_id) %>
-					<span><%= user_gravatar(user, { size: 60 } )  %></span>
+				<div class="row">
+					<div class="col-md-2">
+						<% user = User.find(c.user_id) %>
+						<%= render 'users/links_to_profiles', u: user %>
+					</div>
+					<div class="col-md-7 ">
+						<%= c.body %>
+					</div>
+					<div class="col-md-3">
+						<% if c.user_id == current_user.id %>
+							<%= link_to "update", edit_post_comment_path(@post.id, c.id), class: 'btn btn-primary' %>
+						<% end %>
+						<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
+							<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+						<% end %>
+					</div>
 				</div>
-				<div class="col-md-8">
-					<%= c.body %>
-				</div>
-				<div class="col-md-3">
-					<% if c.user_id == current_user.id %>
-						<%= link_to "update", edit_post_comment_path(@post.id, c.id), class: 'btn btn-primary' %>
-					<% end %>
-					<% if c.user_id == current_user.id || @post.user_id == current_user.id %>
-						<%= link_to "delete", c, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-					<% end %>
-				</div>
-			</div></li>
+			</li>
 			<hr>
-			<br><br>
 		<% end %>
 	</ul>
 	<%= render 'comments/new_comment' %>
