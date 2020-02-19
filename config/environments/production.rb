@@ -4,10 +4,6 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  # This code was added to make images load on Heroku
-  config.serve_static_files = true
-  config.assets.compile = true
-
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
