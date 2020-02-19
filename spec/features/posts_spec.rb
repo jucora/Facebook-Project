@@ -38,7 +38,7 @@ RSpec.feature 'Post', type: :feature do
 			fill_in 'Password', with: 'password'
 			click_button 'Log in'
 			visit post_path(@post)
-			expect(page).to have_link('update', href: "/posts/#{@post.id}/edit")
+			expect(page).to have_button('update')
 		end
 
 		scenario 'should not display the update link when user is not the post creator' do
@@ -47,7 +47,7 @@ RSpec.feature 'Post', type: :feature do
 			fill_in 'Password', with: 'password'
 			click_button 'Log in'
 			visit post_path(@post)
-			expect(page).to_not have_link('update')
+			expect(page).to_not have_button('update')
 		end
 	end 
 end

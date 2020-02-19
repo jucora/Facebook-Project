@@ -30,7 +30,7 @@ RSpec.feature 'Friendship', type: :feature do
 			fill_in 'Password', with: user.password
 			click_button 'Log in'
 			visit users_friends_path
-			expect(page).to have_content('Your friends')
+			expect(page).to have_content('Your Friends')
 			expect(page).to have_content(user2.name)
 			expect(page).to have_selector(:link_or_button, 'Delete')
 			expect(page).to_not have_content(user3.name)
