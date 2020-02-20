@@ -14,6 +14,8 @@ In this project, we’ll be building a Facebook like application. We'll not focu
 
 [Fakebook Project](https://fakebook-rails.herokuapp.com/)
 
+![](images/Fakebook.png)
+
 ## Functionalities
 
 - Create an account
@@ -28,5 +30,5 @@ In this project, we’ll be building a Facebook like application. We'll not focu
 
 ## Authors
 
-[Julian Belmonte](https://github.com/jucora)
+[Julian Belmonte](https://github.com/jucora)<br>
 [Hugo Passos](https://github.com/hugopassos)
