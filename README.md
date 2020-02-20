@@ -10,9 +10,7 @@ In this project, we’ll be building a Facebook like application. We'll not focu
 - Omniauth
 - RSpec/Capybara
 
-## Link to live version
-
-[Fakebook Project](https://fakebook-rails.herokuapp.com/)
+# [Link to live version](https://fakebook-rails.herokuapp.com/)
 
 ![](images/Fakebook.png)
 
