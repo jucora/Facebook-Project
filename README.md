@@ -26,7 +26,24 @@ In this project, we’ll be building a Facebook like application. We'll not focu
 - Accept / reject a friend request
 - Delete a friend
 
+## How to run the project in a local environment
+
+1. You can clone the repo by running the next command in your command line: <p><code> git clone https://github.com/jucora/Facebook-Project.git </code></p>
+
+2. Next, go into the project's folder by running the next command: <p><code>cd Facebook-Project</code></p>
+
+3. Then, run the command to start your local server: <p><code>rails start</code></p>
+
+4. Finally, go to your browser and type: <p><code>http://localhost:3000</p></code>
 ## Authors
 
 [Julian Belmonte](https://github.com/jucora)<br>
 [Hugo Passos](https://github.com/hugopassos)
+
+## Report Issues
+
+Please feel free to contribute, report any issue, feature request or provide any feedback. Click [here](https://github.com/jucora/Facebook-Project/issues)
+
+## Support
+
+Feel free to give a :star:. That would support me a lot.
