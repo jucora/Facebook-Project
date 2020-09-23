@@ -1,6 +1,6 @@
 # Facebook Clone
 
-In this project, we’ll be building a Facebook like application. We'll not focus on styling, but in the core functionalities - users, “friending”, posts, and “liking”. We’ll also implement "sign-in with Facebook" functionality with Omniauth. We'll also write some basic set of unit and integration tests to make sure the associations and the main visual elements have been properly made.
+In this project, we built a Facebook-like application. We did not focus on styling, but instead, we focused on the core functionalities: users, friends, posts, and likes. We also implemented a "sign-in with Facebook" functionality with Omniauth. We also wrote some basic set of unit and integration tests to make sure the associations and the principal visual elements were properly made.
 
 ## Technologies
 
