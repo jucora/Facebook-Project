@@ -6,7 +6,7 @@ ruby '2.6.3'
 gem 'font_awesome5_rails'
 gem 'devise'
 gem 'omniauth-facebook'
-gem 'omniauth', '~> 1.6', '>= 1.6.1'
+gem 'omniauth', '~> 1.9'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use postgresql as the database for Active Record
